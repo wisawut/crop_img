@@ -24,6 +24,18 @@
         bottom:0px;
         
     }
+    .pixel{
+        display: inline-block;
+        width:20px; height: 20px;  
+        border:1px solid #333;
+    }
+    .orenge{ background:RGB(254,  186,   26 ) ; }
+    .black { background:RGB(0,  0,   0 ) ; }
+    .white { background:RGB(255,  255,  255 ) ; }
+    .red   { background:RGB( 244,  66,  66 ) ; }
+    ul#bg li {
+    display:inline;
+}
 </style>
 
 <?php
@@ -53,7 +65,7 @@ $crop_img_width  = (isset($imginfo[0])?$imginfo[0]:0);
 $crop_img_height = (isset($imginfo[1])?$imginfo[1]:0);
     
 $setW =360;
-$setH = 360;
+$setH = 340;
 ?>  
 <script language="Javascript">
             
@@ -122,7 +134,7 @@ $setH = 360;
                         processData: false,  // tell jQuery not to process the data
                         contentType: false ,  // tell jQuery not to set contentType
                         success: function(data) {
-                            console.log(data); 
+                            //console.log(data); return false;
                             if(data != 'fail'){
                               top.location.href='showimg.php';
                             }
@@ -171,6 +183,12 @@ if ($('#file_upload').val() != "") {
     return false;
 }               
 }
+    
+function swcolor(e){
+    console.log(e);
+    $('#previewbg').css('background-color', 'rgba('+e+')');
+    $('#frmbg').val(e);
+}
 </script>
 
     </head>
@@ -200,7 +218,7 @@ if ($('#file_upload').val() != "") {
   <!-- Page Content -->
     <div class="container">
         
-           <div class="row my-4"> 
+   <div class="row my-4"> 
     <?php
     if(empty($status)) {
     ?>
@@ -237,19 +255,28 @@ if ($('#file_upload').val() != "") {
         </div>
         
         <div style="display: block; margin-top: 20px;">
-            <div style="display: block; font-family : Tahoma; font-size : 12px; color : #333333; font-weight : bold;">Preview Image Crop</div>          
+            <div  style="display: block; font-family : Tahoma; font-size : 12px; color : #333333; font-weight : bold;">Preview Image Crop</div>        <div  id="previewbg" style="width:550px; height:360px; padding:10px 95px; background:RGB(254,  186,   26 )  ;">  
             <div style="width:<?=$setW ?>px; height:<?=$setH ?>px; overflow:hidden;">
                 <img src="<?= $crop_img_default  ?>" id="preview" alt="Preview Image" title="Preview Image" border="0"  />              
             </div>
+            </div>
         </div>
 
-        <div style="display: block; margin-top: 20px;">
+        <div style="display: none; margin-top: 20px;">
             <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">X1: <input type="text" size="4" id="xx" name="xx" /></label>
             <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">Y1: <input type="text" size="4" id="yy" name="yy" /></label>
             <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">X2: <input type="text" size="4" id="xx2" name="xx2" /></label>
             <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">Y2: <input type="text" size="4" id="yy2" name="yy2" /></label>
             <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">W: <input type="text" size="4" id="ww" name="ww" /></label>
             <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">H: <input type="text" size="4" id="hh" name="hh" /></label>
+        </div>
+        <div style=" margin-top: 20px;">
+           <ul  id="bg">
+               <li><span class="pixel orenge"></span> <input type="radio" checked  name="colorbg" onchange="swcolor(this.value)" value="254,186,26"></li>
+               <li><span class="pixel red"></span> <input type="radio"  name="colorbg" onchange="swcolor(this.value)"  value=" 244,66,66"></li>
+               <li><span class="pixel white"></span> <input type="radio" name="colorbg" onchange="swcolor(this.value)" value="255,255,255"></li>
+               <li><span class="pixel black"></span> <input type="radio" name="colorbg" onchange="swcolor(this.value)"  value="0,0,0"></li>
+           </ul>
         </div>
         
       
@@ -266,6 +293,7 @@ if ($('#file_upload').val() != "") {
             <input type="hidden" id="setW" name="setW" value="<?=$setW ?>" />
             <input type="hidden" id="setH" name="setH" value="<?= $setH ?>" />
             <input type="hidden" id="action" name="action" value="crop" />
+            <input type="hidden" id="frmbg" name="bgcolor" value="254,186,26" />
             <input type="button" name="CropBT" id="CropBT" value="บันทึกรูปภาพ"  onclick="checkCoords()"/>
         </form>
                 
@@ -273,7 +301,9 @@ if ($('#file_upload').val() != "") {
         
         
         <!-- This is the form that our event handler fills -->
-        <form id="upload_form" enctype="multipart/form-data" >
+       
+        <div class="col-md-4 mb-4 card ">
+               <form id="upload_form" enctype="multipart/form-data" >
             <input type="file"   name="upload" id="upload" />
           
             <input type="hidden" name="action" id="action" value="upload" />
@@ -283,7 +313,10 @@ if ($('#file_upload').val() != "") {
             <input type="button" value="อัพโหลดรูปนี้" onclick="checkUpload()"/>
             <br />
             <label>ชื่อภาพต้องเป็นภาษาอังกฤษเท่านั้น.</label>
-        </form>   
+        </form> 
+        </div>
+       
+       
     </div>
     </div>
     </div>

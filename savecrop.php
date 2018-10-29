@@ -31,12 +31,12 @@
     
     
 if($_POST){
-    
+ 
     header( "Content-type: image/jpeg" );
     
    
 
-
+  $bg = (isset($_POST['bgcolor'])?$_POST['bgcolor']:'254,186,26');
    
     $image_uploadinfo = imfinfo($_POST['src']);
     if($image_uploadinfo[1] == 'jpg' ){
@@ -67,8 +67,11 @@ if($_POST){
     // img_bg
    $my_imgbg = imagecreatetruecolor( 550, 360 ); //width & height
  //  $my_imgbg = imagecreate( 550, 360 ); //width & height
-
-   $background  = imagecolorallocate( $my_imgbg  , 254,  186,   26 );
+   
+    $setbg = explode(',',$bg);
+  
+   //$background  = imagecolorallocate( $my_imgbg  , 244, 66, 66  );
+   $background  = imagecolorallocate( $my_imgbg  , $setbg[0], $setbg[1] , $setbg[2]  );
     
    
     imagefill($my_imgbg, 0, 0, $background); 
@@ -104,10 +107,10 @@ $imagenew_bg = 'img/upload/'.date('YmdHis').rand('100').'.'.$image_uploadinfo[1]
 if($image_uploadinfo[1] == 'png' ){
     $out = imagecreatetruecolor(550, 360);
     imagecopyresampled($out, $my_imgbg, 0, 0, 0, 0, 550, 360, 550, 360);
-    imagecopyresampled($out, $img_crop, 95, 0, 0, 0, 360, 360, 360, 360);
+    imagecopyresampled($out, $img_crop, 95, 10, 0, 0, 360, 340, 360, 340);
    
 }else{
-  imagecopy($my_imgbg, $img_crop, 95, 0, 0, 0,360, 360);  
+  imagecopy($my_imgbg, $img_crop, 95, 10, 0, 0,360, 340);  
     
 }
     

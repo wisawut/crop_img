@@ -16,6 +16,7 @@ if($_POST){
      exit;
 }
 
+exit;
 
 header( "Content-type: image/png" );
 
