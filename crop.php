@@ -1,9 +1,17 @@
 <html>
-<head><script src="js/jquery.min.js"></script>
+<head>
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/small-business.css" rel="stylesheet">    
+    
+<script src="js/jquery.min.js"></script>
 <script src="js/jquery.Jcrop.js"></script>
 
 <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
 <link rel="stylesheet" href="css/demo.css" type="text/css" />
+    
 
 <style>
     .right{
@@ -32,7 +40,7 @@ $max_height = 480;
 $new_file_path = '';
 
 
-$crop_img_default =  $_COOKIE["tmp_photo"];
+$crop_img_default =  (isset($_COOKIE["tmp_photo"])?$_COOKIE["tmp_photo"]:null);
     
 if (!empty($crop_img_default)) {
     $status = 'uploaded';
@@ -168,7 +176,31 @@ if ($('#file_upload').val() != "") {
     </head>
 
     <body>
+        
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<div class="container">
+<a class="navbar-brand" href="#">Crop Image</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+<ul class="navbar-nav ml-auto">
+<li class="nav-item active">
+<a class="nav-link" href="#">Home
+<span class="sr-only">(current)</span>
+</a>
+</li>
 
+</ul>
+</div>
+</div>
+</nav>
+
+  <!-- Page Content -->
+    <div class="container">
+        
+           <div class="row my-4"> 
     <?php
     if(empty($status)) {
     ?>
@@ -258,5 +290,9 @@ if ($('#file_upload').val() != "") {
     <?php
     }
     ?>
+        
+   </div>      
+   </div>      
+        
     </body>
 </html>

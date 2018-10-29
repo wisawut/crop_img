@@ -17,7 +17,7 @@ if($_POST){
 }
 
 
-header( "Content-type: image/jpeg" );
+header( "Content-type: image/png" );
 
 
 
@@ -35,9 +35,8 @@ $font = 'C:\xampp\htdocs\git_me\crop\crop_img\EkkamaiStandard-Light.ttf';
 
 
 
- 
-     
-     
+
+
      
 //imagettftext($my_img, 20, 0, 11, 21, $grey, $font, $text);
 //imagettftext($my_img, 20, 0, 10, 30, $text_colour, $font, $text);
@@ -45,19 +44,22 @@ $font = 'C:\xampp\htdocs\git_me\crop\crop_img\EkkamaiStandard-Light.ttf';
 //imagettftext($my_img, 14, 0, 260, 80, $text_colour, $font, $text2);
 
 
-
-$src = imagecreatefrompng('img/test.png');
-$src2 = imagecreatefromjpeg('img/test3.jpg');
-imagecopymerge($my_img, $src2, 0, 0, 0, 0,250, 260, 100 );
+$src =  @imagecreatefrompng('img/upload/crop_buff.png');
 
 
+$out = imagecreatetruecolor(550, 360);
+imagecopyresampled($out, $my_img, 0, 0, 0, 0, 550, 360, 550, 360);
 
 
+imagecopyresampled($out, $src, 95, 0, 0, 0, 360, 360, 360, 360);
 
-// imagepng( $my_img );
- imagejpeg( $my_img );
+imagejpeg($out);
+exit;
 
-imagedestroy($my_img);
+
+ //imagejpeg( $my_img );
+
+imagedestroy($out);
 
 
 
