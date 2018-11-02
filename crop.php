@@ -11,6 +11,18 @@
 
 <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
 <link rel="stylesheet" href="css/demo.css" type="text/css" />
+
+    
+    
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/asColorPicker.css">
+
+  <script src="js/jquery.toc.js"></script>
+  <script src="js/prism.js"></script>
+  <script src="js/jquery-asColor.js"></script>
+  <script src="js/jquery-asGradient.js"></script>
+  <script src="js/jquery-asColorPicker.js"></script>
     
 
 <style>
@@ -190,6 +202,18 @@ function swcolor(e){
     $('#frmbg').val(e);
 }
 </script>
+     <script>
+       
+         
+         $(function(){
+              $(".example_complex").asColorPicker();
+             
+             $( ".example_complex" ).keypress(function() {
+  console.log(1);
+             });
+             
+         })
+        </script>
 
     </head>
 
@@ -279,6 +303,16 @@ function swcolor(e){
            </ul>
         </div>
         
+      <div class="col-md-8 mb-4  ">
+        <div class="example">
+        <input type='text' class="example_complex" data-mode="complex" value="#000"  name="colorforbg"   />
+       
+      </div>
+    </div>
+
+
+        
+        
       
         
 
@@ -302,7 +336,7 @@ function swcolor(e){
         
         <!-- This is the form that our event handler fills -->
        
-        <div class="col-md-4 mb-4 card ">
+        <div class="col-md-8 mb-4 card ">
                <form id="upload_form" enctype="multipart/form-data" >
             <input type="file"   name="upload" id="upload" />
           
