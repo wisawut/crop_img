@@ -14,16 +14,9 @@
 
     
     
-  <link rel="stylesheet" href="css/prism.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/asColorPicker.css">
 
-  <script src="js/jquery.toc.js"></script>
-  <script src="js/prism.js"></script>
-  <script src="js/jquery-asColor.js"></script>
-  <script src="js/jquery-asGradient.js"></script>
-  <script src="js/jquery-asColorPicker.js"></script>
-    
+
+
 
 <style>
     .right{
@@ -78,6 +71,13 @@ $crop_img_height = (isset($imginfo[1])?$imginfo[1]:0);
     
 $setW =360;
 $setH = 340;
+    
+    
+$setW2 =458;
+$setH2 = 300;
+    
+$marleft = ceil( (550-$setW)/2);
+$martop = ceil( (360-$setH)/2);
 ?>  
 <script language="Javascript">
             
@@ -94,8 +94,9 @@ $setH = 340;
                 $('#cropbox').Jcrop({
                     onSelect: updateCoords, 
                     onChange: updateCoords, 
-                    aspectRatio: set_x/set_y,
-                      trueSize:[<?=$crop_img_width ?>,<?=$crop_img_height?> ],
+                   aspectRatio: set_x/set_y,
+                   //  aspectRatio: 16/9,
+                   trueSize:[<?=$crop_img_width ?>,<?=$crop_img_height?> ],
                 });
                 
             
@@ -205,14 +206,16 @@ function swcolor(e){
      <script>
        
          
-         $(function(){
-              $(".example_complex").asColorPicker();
+
              
-             $( ".example_complex" ).keypress(function() {
-  console.log(1);
-             });
+        
+
+
              
          })
+         
+         
+
         </script>
 
     </head>
@@ -274,12 +277,12 @@ function swcolor(e){
     <div class="article">
         
         <!-- This is the image we're attaching Jcrop to -->
-        <div style="display: block;">
+        <div style="display: block;" >
             <img src="<?= $crop_img_default  ?>" id="cropbox" alt="Crop Image" title="Crop Image" border="0"  style="width:1000px;"/>
         </div>
         
         <div style="display: block; margin-top: 20px;">
-            <div  style="display: block; font-family : Tahoma; font-size : 12px; color : #333333; font-weight : bold;">Preview Image Crop</div>        <div  id="previewbg" style="width:550px; height:360px; padding:10px 95px; background:RGB(254,  186,   26 )  ;">  
+            <div  style="display: block; font-family : Tahoma; font-size : 12px; color : #333333; font-weight : bold;">Preview Image Crop</div>        <div  id="previewbg" style="width:550px; height:360px; padding:<?=$martop?>px <?=$marleft?>px; background:RGB(254,  186,   26 )  ;" >  
             <div style="width:<?=$setW ?>px; height:<?=$setH ?>px; overflow:hidden;">
                 <img src="<?= $crop_img_default  ?>" id="preview" alt="Preview Image" title="Preview Image" border="0"  />              
             </div>
@@ -303,12 +306,7 @@ function swcolor(e){
            </ul>
         </div>
         
-      <div class="col-md-8 mb-4  ">
-        <div class="example">
-        <input type='text' class="example_complex" data-mode="complex" value="#000"  name="colorforbg"   />
-       
-      </div>
-    </div>
+   
 
 
         

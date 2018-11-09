@@ -1,5 +1,5 @@
 <?php
-
+include('watermark.php');
  function imfinfo($originalFile) {
 
     $info = getimagesize($originalFile);
@@ -63,30 +63,22 @@ if($_POST){
           chmod($imagenew, 0777);
     }
     
+  
+
     
-    // img_bg
+    // create image background
    $my_imgbg = imagecreatetruecolor( 550, 360 ); //width & height
- //  $my_imgbg = imagecreate( 550, 360 ); //width & height
-   
+
+   // color from input post
     $setbg = explode(',',$bg);
   
-   //$background  = imagecolorallocate( $my_imgbg  , 244, 66, 66  );
-   $background  = imagecolorallocate( $my_imgbg  , $setbg[0], $setbg[1] , $setbg[2]  );
-    
-   
-    imagefill($my_imgbg, 0, 0, $background); 
-    
-    
-//$text_colour = imagecolorallocate( $my_imgbg, 255, 255, 255 );
-//$grey = imagecolorallocate($my_imgbg, 128, 128, 128);
 
-//location front full path
-//$font = 'C:\xampp\htdocs\git_me\crop\crop_img\EkkamaiStandard-Light.ttf';
-     
-//imagettftext($my_img, 20, 0, 11, 21, $grey, $font, $text);
-//imagettftext($my_img, 20, 0, 10, 30, $text_colour, $font, $text);
-//imagettftext($my_img, 20, 0, 10, 30, $text_colour, $font, $text);
-//imagettftext($my_img, 14, 0, 260, 80, $text_colour, $font, $text2);
+   $background  = imagecolorallocate( $my_imgbg  , $setbg[0], $setbg[1] , $setbg[2]  );    
+   imagefill($my_imgbg, 0, 0, $background); 
+    $watermark =  @imagecreatefrompng('img/watermark.png');
+    imagecopyresampled($my_imgbg, $watermark, 0, 0, 0, 0, 550, 360, 550, 360);
+    
+
     
     if($image_uploadinfo[1] == 'jpg' ){
           $img_crop = imagecreatefromjpeg($imagenew);
@@ -97,12 +89,11 @@ if($_POST){
         
 
     }
-    
-    
 
-$imagenew_bg = 'img/upload/'.date('YmdHis').rand('100').'.'.$image_uploadinfo[1];
 
-    
+  
+// meach with crop
+$imagenew_bg = 'img/upload/'.date('YmdHis').rand('100').'.'.$image_uploadinfo[1];   
     
 if($image_uploadinfo[1] == 'png' ){
     $out = imagecreatetruecolor(550, 360);
@@ -114,10 +105,12 @@ if($image_uploadinfo[1] == 'png' ){
     
 }
     
+    
+    
   if($image_uploadinfo[1] == 'jpg' ){
-       imagejpeg($my_imgbg, $imagenew_bg, 75);
+       imagejpeg($my_imgbg, $imagenew_bg, 90);
      }else if($image_uploadinfo[1] == 'png'){   
-      imagejpeg($out, $imagenew_bg, 75);
+      imagejpeg($out, $imagenew_bg, 90);
     }
     
  chmod($imagenew_bg, 0777);

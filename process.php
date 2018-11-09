@@ -16,7 +16,7 @@ if($_POST){
      exit;
 }
 
-exit;
+
 
 header( "Content-type: image/png" );
 
@@ -45,17 +45,18 @@ $font = 'C:\xampp\htdocs\git_me\crop\crop_img\EkkamaiStandard-Light.ttf';
 //imagettftext($my_img, 14, 0, 260, 80, $text_colour, $font, $text2);
 
 
-$src =  @imagecreatefrompng('img/upload/crop_buff.png');
+$src =  @imagecreatefrompng('img/watermark.png');
+$src_upload =  @imagecreatefromjpeg('img/upload/crop_buff.jpg');
 
 
 $out = imagecreatetruecolor(550, 360);
-imagecopyresampled($out, $my_img, 0, 0, 0, 0, 550, 360, 550, 360);
+//$background  = imagecolorallocate( $out, 254,  186,   26 );
+imagecopyresampled($out, $src, 0, 0, 0, 0, 550, 360, 550, 360);
 
 
-imagecopyresampled($out, $src, 95, 0, 0, 0, 360, 360, 360, 360);
+imagecopyresampled($out, $src_upload, 95, 0, 0, 0, 360, 360, 360, 360);
 
 imagejpeg($out);
-exit;
 
 
  //imagejpeg( $my_img );
