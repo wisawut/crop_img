@@ -68,13 +68,23 @@ if (!empty($crop_img_default)) {
 
 $crop_img_width  = (isset($imginfo[0])?$imginfo[0]:0);
 $crop_img_height = (isset($imginfo[1])?$imginfo[1]:0);
+ 
     
 $setW =360;
 $setH = 340;
+$getscalling = 1;    
+if(isset($_GET['scall']) && $_GET['scall'] ==2 ){
+    $getscalling = 2;   
+    $setW =458;
+    $setH = 300;
+}else{
+    $setW =360;
+    $setH = 340;
+} 
+
     
     
-$setW2 =458;
-$setH2 = 300;
+
     
 $marleft = ceil( (550-$setW)/2);
 $martop = ceil( (360-$setH)/2);
@@ -86,16 +96,19 @@ $martop = ceil( (360-$setH)/2);
     
             var set_x = "<?= $setW ?>";
             var set_y = "<?= $setH ?>";
+        
             
+             var jcrop_api ;
+    
+            $(function(){     
+                
+                
 
-            
-            
-            $(function(){              
-                $('#cropbox').Jcrop({
+             jcrop_api = $('#cropbox').Jcrop({
                     onSelect: updateCoords, 
                     onChange: updateCoords, 
-                   aspectRatio: set_x/set_y,
-                   //  aspectRatio: 16/9,
+                     aspectRatio: set_x/set_y,
+                
                    trueSize:[<?=$crop_img_width ?>,<?=$crop_img_height?> ],
                 });
                 
@@ -202,22 +215,20 @@ function swcolor(e){
     $('#previewbg').css('background-color', 'rgba('+e+')');
     $('#frmbg').val(e);
 }
+function swscalling(e){
+    console.log(e);
+     
+top.location.href="crop.php?scall="+e
+    
+    
+       // initJcrop();
+		
+	
+    
+    
+}
 </script>
-     <script>
-       
-         
-
-             
-        
-
-
-             
-         })
-         
-         
-
-        </script>
-
+    
     </head>
 
     <body>
@@ -256,7 +267,7 @@ function swcolor(e){
         <!-- This is the form that our event handler fills -->
         <form id="upload_form" enctype="multipart/form-data" >
             <input type="file"   name="upload" id="upload" />   
-               <input type="button" value="อัพโหลดรูปนี้" onclick="checkUpload()"/>
+            <input type="button" value="อัพโหลดรูปนี้" onclick="checkUpload()"/>
             <input type="hidden" name="action" id="action" value="upload" />
             <input type="hidden" id="setW" name="setW" value="<?=$setW; ?>" />
             <input type="hidden" id="setH" name="setH" value="<?=$setH; ?>" />
@@ -275,6 +286,23 @@ function swcolor(e){
     <div id="outer">
     <div class="jcExample">
     <div class="article">
+        
+        
+        
+        <div style=" margin-top: 20px;">
+            <div style="float:left; margin:10px;"> 
+            <div style="cursor:pointer;width:80px; height:80px; border:1px solid #333; background:#EEE;" onclick="swscalling('1')"></div>
+            <input type="radio" name="scalling"  value="1"  <?=($getscalling==1?'checked':'')?>    onchange="swscalling(this.value)" /> <br>
+            </div>
+           <div style="float:left; margin:10px;">
+               <div style="cursor:pointer; width:120px; height:80px; border:1px solid #333;  background:#EEE;"  onclick="swscalling('2')" ></div>
+            <input type="radio" name="scalling"  value="2"     <?=($getscalling==2?'checked':'')?>  onchange="swscalling(this.value)"   /> <br>
+            </div>
+            <div style="clear:both;"></div>
+              
+        </div>
+        
+        
         
         <!-- This is the image we're attaching Jcrop to -->
         <div style="display: block;" >
@@ -308,7 +336,6 @@ function swcolor(e){
         
    
 
-
         
         
       
@@ -326,6 +353,7 @@ function swcolor(e){
             <input type="hidden" id="setH" name="setH" value="<?= $setH ?>" />
             <input type="hidden" id="action" name="action" value="crop" />
             <input type="hidden" id="frmbg" name="bgcolor" value="254,186,26" />
+            <input type="hidden"  name="scalling" value="<?=$getscalling?>" />
             <input type="button" name="CropBT" id="CropBT" value="บันทึกรูปภาพ"  onclick="checkCoords()"/>
         </form>
                 

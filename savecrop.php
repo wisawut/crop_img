@@ -45,8 +45,20 @@ if($_POST){
         $soure_img = imagecreatefrompng($_POST['src']);
     }
      $imagenew = 'img/upload/crop_buff.'.$image_uploadinfo[1];
-     $width = '360';
-     $height = '360';
+    
+    
+    
+         $width = '360';
+         $height = '340';
+         $top = '10';
+         $left ='95';
+     if($_POST['scalling'] == 2){
+          $width ='458';
+          $height = '300';
+         $top='30';
+         $left='46';
+         
+     }
     // $ratio = imagesy($soure_img) / imagesx($soure_img);
    //  $height = $width * $ratio;
      $my_img = imagecreatetruecolor($width,$height);  
@@ -98,10 +110,11 @@ $imagenew_bg = 'img/upload/'.date('YmdHis').rand('100').'.'.$image_uploadinfo[1]
 if($image_uploadinfo[1] == 'png' ){
     $out = imagecreatetruecolor(550, 360);
     imagecopyresampled($out, $my_imgbg, 0, 0, 0, 0, 550, 360, 550, 360);
-    imagecopyresampled($out, $img_crop, 95, 10, 0, 0, 360, 340, 360, 340);
+   // imagecopyresampled($out, $img_crop, 95, 10, 0, 0, 360, 340, 360, 340);
+    imagecopyresampled($out, $img_crop, $left, $top , 0, 0, $width, $height, $width, $height);
    
 }else{
-  imagecopy($my_imgbg, $img_crop, 95, 10, 0, 0,360, 340);  
+  imagecopy($my_imgbg, $img_crop, $left, $top, 0, 0,$width, $height);  
     
 }
     
