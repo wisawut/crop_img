@@ -34,12 +34,31 @@
         width:20px; height: 20px;  
         border:1px solid #333;
     }
-    .orenge{ background:RGB(254,  186,   26 ) ; }
-    .black { background:RGB(0,  0,   0 ) ; }
-    .white { background:RGB(255,  255,  255 ) ; }
-    .red   { background:RGB( 244,  66,  66 ) ; }
-    ul#bg li {
-    display:inline;
+    .yellow{ background:RGB(255,220,0 ) ; }
+    .navy{ background:RGB(0,31,63 ) ; }
+    .aqua{ background:RGB(127,219,255) ; }
+    .olive{ background:RGB(61,153,112) ; }
+    .lime{ background:RGB(1,255,112) ; }
+    .orange{ background:RGB(255,133,27) ; }
+    .maroon{ background:RGB(133,20,75) ; }
+    .purple{ background:RGB(177,13,201) ; }
+    .gray{ background:RGB(170,170,170) ; }
+    .blue{ background:RGB(0,116,217) ; }
+    .teal{ background:RGB(57,204,204) ; }
+    .green{ background:RGB(46,204,64) ; }
+    .red{ background:RGB(250, 15, 46) ; }
+    .fuchsia{ background:RGB(240,18,190) ; }
+    .black{ background:RGB(17,17,17) ; }
+    .silver{ background:RGB(221,221,221) ; }
+    .white{ background:RGB(255,255,255) ; }
+ 
+ 
+    
+    
+    ul#bg li {display:inline;}
+    td{  width:80px; height:30px; cursor: pointer;  margin:5px; border: 1px solid #FFF;}
+    table#colorTable {
+    border-collapse:collapse;
 }
 </style>
 
@@ -310,21 +329,85 @@ top.location.href="crop.php?scall="+e
         </div>
         
         <div style="display: block; margin-top: 20px;">
-            <div  style="display: block; font-family : Tahoma; font-size : 12px; color : #333333; font-weight : bold;">Preview Image Crop</div>        <div  id="previewbg" style="width:550px; height:360px; padding:<?=$martop?>px <?=$marleft?>px; background:RGB(254,  186,   26 )  ;" >  
+            <div  style="display: block; font-family : Tahoma; font-size : 12px; color : #333333; font-weight : bold;">Preview Image Crop</div> <div  id="previewbg" style="width:550px; height:360px; padding:<?=$martop?>px <?=$marleft?>px; background:RGB(254,  186,   26 ); float:left;" >  
             <div style="width:<?=$setW ?>px; height:<?=$setH ?>px; overflow:hidden;">
                 <img src="<?= $crop_img_default  ?>" id="preview" alt="Preview Image" title="Preview Image" border="0"  />              
             </div>
             </div>
+            
+            <div style="float:left; margin-left:20px;">
+                <table id="colorTable">
+                    <tr>
+                        <td  class="yellow"     onclick="swcolor('255,220,0')" >                    YELLOW      
+                            <!--<input type="radio" checked  name="colorbg" onchange="swcolor(this.value)" value="254,186,26">-->
+                        </td>
+                        <td class="navy"   onclick="swcolor('0,31,63')">
+                            NAVY
+                            <!--<input type="radio"  name="colorbg" onchange="swcolor(this.value)"  value=" 244,66,66">-->
+                        </td>
+                    
+                    </tr>
+                    
+                    <tr>
+                        <td  class="aqua"     onclick="swcolor('127,219,255')" >            AQUA
+                        </td>
+                        <td class="olive"   onclick="swcolor('61,153,112')">  
+                            OLIVE
+                        </td>
+                    </tr>
+                    <tr>
+                    <td  class="lime"     onclick="swcolor('1,255,112')" >LIME
+                    </td>
+                    <td class="orange"   onclick="swcolor('255,133,27')">                ORANGE
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td  class="maroon"  onclick="swcolor('133,20,75')" >MAROON
+                    </td>
+                    <td class="purple"   onclick="swcolor('177,13,201')"> PURPLE
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td  class="gray"  onclick="swcolor('170,170,170')" >GRAY
+                    </td>
+                    <td class="blue"   onclick="swcolor('0,116,217')"> BLUE
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td  class="teal"  onclick="swcolor('57,204,204')" >TEAL
+                    </td>
+                    <td class="green"   onclick="swcolor('46,204,64')"> GREEN
+                    </td>
+                    </tr>
+                    <tr>
+                    <td  class="red"  onclick="swcolor('250, 15, 46')" >RED
+                    </td>
+                    <td class="fuchsia"   onclick="swcolor('240,18,190')"> FUCHSIA
+                    </td>
+                    </tr>
+                     <tr>
+                    <td  class="black"  onclick="swcolor('17,17,17')" >BLACK
+                    </td>
+                    <td class="silver"   onclick="swcolor('221,221,221')"> SILVER
+                    </td>
+                    </tr>
+                    <tr>
+                    <td  class="white"  onclick="swcolor('255,255,255')" >WHITE
+                    </td>
+                    <td class="white"   onclick="swcolor('255,255,255')"> 
+                    </td>
+                    </tr>
+                    
+                    
+                </table>
+            </div>
+            <div style="clear:both;"></div>
         </div>
 
-        <div style="display: none; margin-top: 20px;">
-            <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">X1: <input type="text" size="4" id="xx" name="xx" /></label>
-            <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">Y1: <input type="text" size="4" id="yy" name="yy" /></label>
-            <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">X2: <input type="text" size="4" id="xx2" name="xx2" /></label>
-            <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">Y2: <input type="text" size="4" id="yy2" name="yy2" /></label>
-            <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">W: <input type="text" size="4" id="ww" name="ww" /></label>
-            <label style="font-family : Tahoma; font-size : 11px; color : #333333; font-weight : normal;">H: <input type="text" size="4" id="hh" name="hh" /></label>
-        </div>
+     
         <div style=" margin-top: 20px;">
            <ul  id="bg">
                <li><span class="pixel orenge"></span> <input type="radio" checked  name="colorbg" onchange="swcolor(this.value)" value="254,186,26"></li>
